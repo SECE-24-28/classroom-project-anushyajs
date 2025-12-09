@@ -1,0 +1,47 @@
+   .main{
+           display: flex;
+            justify-content:space-between;
+            height:50px;
+            width:1000px;
+            position:relative;
+            top:200px;
+    }
+    
+    .flexbox2{
+        background-color: rgb(218, 212, 212);
+         border-radius: 10px;
+         height:300px;
+         width:300px;
+         justify-content:space-between;
+
+    }
+ 
+    .btn1{
+        position:relative;
+            top:00px;
+            left:20px;
+            height:40px;
+            width:50px;
+            border-radius: 10px;
+            background-color: green;
+    }
+    .line{
+        position:relative;
+        top:0px;
+        left:20px;
+    }
+    .line1{
+        position:relative;
+        top:px;
+        left:1px;
+    }
+    .btn2{
+        position:relative;
+            top:00px;
+            left:20px;
+            height:40px;
+            width:50px;
+            border-radius: 10px;
+            background-color: green;
+    }
+    

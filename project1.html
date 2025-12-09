@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 320px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .output-box {
+            display: flex;
+            justify-content: space-between;
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .output-box span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        .options {
+            margin-top: 10px;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        input[type="checkbox"] {
+            transform: scale(1.2);
+            margin-right: 10px;
+        }
+
+        .slider-box {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>Password Generator</h2>
+
+        <!-- Password display + copy button -->
+        <div class="output-box">
+            <span id="password">---------</span>
+            <button onclick="copyPassword()" style="width:70px;">Copy</button>
+        </div>
+
+        <!-- Length slider -->
+        <div class="slider-box">
+            <label>Password length: <span id="lengthVal">10</span></label>
+            <input type="range" id="length" min="4" max="20" value="10" oninput="updateLength()">
+        </div>
+
+        <!-- Options -->
+        <div class="options">
+            <label><input type="checkbox" id="lower" checked> Include lowercase (a-z)</label>
+            <label><input type="checkbox" id="upper" checked> Include uppercase (A-Z)</label>
+            <label><input type="checkbox" id="number" checked> Include numbers (0-9)</label>
+            <label><input type="checkbox" id="symbol" checked> Include symbols (!@#$)</label>
+        </div>
+
+        <button onclick="generatePassword()">Generate</button>
+    </div>
+
+
+    <script>
+        function updateLength() {
+            document.getElementById("lengthVal").innerText =
+                document.getElementById("length").value;
+        }
+
+        function generatePassword() {
+            let len = document.getElementById("length").value;
+            let lower = "abcdefghijklmnopqrstuvwxyz";
+            let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let number = "0123456789";
+            let symbol = "!@#$%^&*()_+=";
+
+            let finalSet = "";
+
+            if (document.getElementById("lower").checked) finalSet += lower;
+            if (document.getElementById("upper").checked) finalSet += upper;
+            if (document.getElementById("number").checked) finalSet += number;
+            if (document.getElementById("symbol").checked) finalSet += symbol;
+
+            if (finalSet === "") {
+                alert("Please select at least one option");
+                return;
+            }
+
+            let password = "";
+            for (let i = 0; i < len; i++) {
+                password += finalSet.charAt(Math.floor(Math.random() * finalSet.length));
+            }
+
+            document.getElementById("password").innerText = password;
+        }
+
+        function copyPassword() {
+            navigator.clipboard.writeText(document.getElementById("password").innerText);
+            alert("Copied!");
+        }
+    </script>
+
+</body>
+</html>
